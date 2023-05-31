@@ -1,0 +1,20 @@
+int missingNumber(int A[], int N)
+{
+   int total = 0;
+    for(int i = 1; i<=N; i++){
+        total = total + i;
+    }
+
+// count the total of avilable numbers
+    int value = 0;
+    int j = 0;
+    while(j<N-1){
+        value = value + A[j];
+        j++;
+    }
+   
+
+// subtract total of all no - total of avilable no and return
+
+    return total - value;;
+}
