@@ -1,0 +1,48 @@
+class Solution
+{
+    public:
+    void predecessor(Node* root, Node*& pred, int key)
+    {
+        //traveserse through all nodes of BST
+        while(root!=0)
+        {
+          //if given key value is less or equal to than current root value
+          //then we will go to left part of bst else rigth part
+          if(key<=root->key)
+          {
+            root=root->left;
+          }
+          else
+          {
+            pred=root;
+            root=root->right;
+          }
+       }
+    }
+    //this function will find successor
+    //successor:samllest key greater than given key
+    void successor(Node* root, Node*& succ, int key)
+    {
+        //traverse through all element of BST
+        while(root!=0)
+        { 
+           //if given key value is greater or equal to than current root value
+           //then we will go to rigth part of bst else left part
+          if(key>= root->key)
+          {
+              root=root->right;
+          }
+          else
+          {
+              succ=root;
+              root=root->left;
+          }
+        }
+    }
+    
+    void findPreSuc(Node* root, Node*& pred, Node*& succ, int key)
+    {
+      predecessor(root,pred,key);
+      successor(root,succ,key);
+    }
+};
