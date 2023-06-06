@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int s =0;
+        int e=nums.size()-1;
+        int minval = INT_MAX;
+       int mid = s+(e-s)/2;
+       while(s<=e){
+           if(s<e) {
+               minval =  min(minval,nums[s]);
+               break;
+           }
+           if(nums[s] <=nums[mid]){
+               minval = min(minval,nums[s]);
+               s = mid+1;
+           }
+           else{
+               minval = min(minval,nums[mid]);
+               e=mid-1;
+           }
+       }
+       return minval;
+    }
+};
