@@ -1,0 +1,16 @@
+class Solution{
+	public:
+	int NthRoot(int n, int m)
+	{
+	    long long int i=1;
+	    long long int ans=1;
+	    while(pow(i,n)<=m){
+	        ans= pow(i,n);
+	        i++;
+	    }
+	    if(ans==m) return i-1;
+	    return -1;
+	}  
+
+
+};
