@@ -1,0 +1,17 @@
+class Solution{   
+public:
+    int median(vector<vector<int>> &matrix, int R, int C){
+       int mn = 0,mx = 0,d = (R*C+1)/2;
+for(int i = 0;i < R;i++){
+    mn = min(mn,matrix[i][0]);
+    mx = max(mx,matrix[i][C-1]);
+}
+while(mn < mx){
+    int md = (mn+mx)/2,c = 0;
+    for(int i = 0;i < R;i++) c += upper_bound(matrix[i].begin(),matrix[i].end(),md)-matrix[i].begin();
+    if(d > c) mn = md+1;
+    else mx = md;
+}
+return mn;
+    }
+};
