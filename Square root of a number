@@ -1,0 +1,12 @@
+class Solution{
+  public:
+    long long int floorSqrt(long long int x) 
+    {
+        if(x<0) return 0;
+        int i=0;
+        while(i*i<=x){
+            i++;
+        }
+        return i-1;
+    }
+};
