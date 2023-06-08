@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int f(vector<int>& vec, int m, int k,int mid){
+        
+        int curr = 0;
+        int n = vec.size();
+        int temp = 0;
+        
+        for(int i =0;i<n;i++){
+            
+            if(temp==k){
+                curr++;
+                temp = 0;
+            }
+            
+            if(vec[i]<=mid){
+                temp++;
+            }
+            else{
+                temp = 0;
+            }
+        }
+        
+        if(temp==k){
+            curr++;
+            temp = 0;
+        }
+        
+        return curr>=m;
+    }
+    
+    int minDays(vector<int>& vec, int m, int k) {
+        
+        int high = vec[0];
+        int n = vec.size();
+        
+        for(auto iter : vec){
+            high = max(high,iter);
+        }
+        
+        int low = 1;
+        
+        int ans = -1;
+        
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            
+            if(f(vec,m,k,mid)){
+                ans = mid;
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        
+        return ans;
+    }
+};
