@@ -1,0 +1,14 @@
+class Solution
+{
+	public:
+		vector<string>find_permutation(string S)
+		{
+		    vector<string> ans;
+		    sort(S.begin(),S.end()); 
+		    do{
+		        string p(S.begin(),S.end());
+		        ans.push_back(p);
+		    }while(next_permutation(S.begin(),S.end()));
+		    return ans;
+		}
+};
