@@ -1,0 +1,29 @@
+class Solution
+{
+    public:
+    Node* deleteNode(Node *head_ref, int x)
+    {
+        Node* curr= head_ref;
+        Node* pvs = NULL;
+        
+        while(--x){
+            pvs = curr;
+            curr = curr->next;
+        }
+        
+        if(pvs == NULL){
+            head_ref->next->prev = NULL;
+            return head_ref->next;
+        }
+        
+        if(curr->next == NULL){
+            pvs->next = NULL;
+            return head_ref;
+        }
+        
+        pvs->next = curr->next;
+        curr->next->prev = pvs;
+        
+        return head_ref;
+    }
+};
