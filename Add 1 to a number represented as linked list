@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+    Node* addOne(Node *head) 
+    {
+        Node *notNine=head, *end = head;
+        while(end->next){
+            if(end->data!=9) notNine=end;
+            end=end->next;
+        }
+        if(end->data==9){
+            notNine->data=notNine->data+1;
+            notNine=notNine->next;
+            while(notNine){
+                notNine->data=0;
+                notNine=notNine->next;
+            }
+        }else{
+            end->data=end->data+1;
+        }
+        return head;
+    }
+};
