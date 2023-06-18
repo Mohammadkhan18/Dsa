@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    int distributeTicket(int N, int K) {
+    int arr[2];
+arr[0]=1;
+arr[1]=N;
+int dir=0;
+while(arr[1]-arr[0]>K)
+{
+    if(dir==0)
+    {
+    arr[0]=arr[0]+K;
+    dir=-1;
+    }
+    if(arr[1]-arr[0]>K)
+    {
+        arr[1]=arr[1]-K;
+        dir=0;
+    }
+}
+return dir==-1?arr[0]:arr[1];
+
+    }
+};
