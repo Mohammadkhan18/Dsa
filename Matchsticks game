@@ -1,0 +1,7 @@
+class Solution {
+  public:
+    int matchGame(long long N) {
+        int res = N % 5;
+        return res == 0 ? -1: res;
+    }
+}
