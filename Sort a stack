@@ -1,0 +1,14 @@
+void SortedStack :: sort()
+{
+  if(s.size()==1) return ;
+  int t = s.top();
+  s.pop();
+  sort();
+  if(s.top() > t){
+      int d = s.top();
+      s.pop();
+      s.push(t);
+      s.push(d);
+      sort();
+  }else s.push(t);
+}
