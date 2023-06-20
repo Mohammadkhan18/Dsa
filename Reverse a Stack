@@ -1,0 +1,16 @@
+class Solution{
+public:
+     void rev(stack<int>&st,queue<int>&t){
+         if(st.empty()) return;
+         int c = st.top();
+         st.pop();
+         t.push(c);
+         rev(st,t);
+         st.push(t.front());
+         t.pop();
+     }
+    void Reverse(stack<int> &st){
+        queue<int>t;
+        rev(st,t);
+    }
+};
