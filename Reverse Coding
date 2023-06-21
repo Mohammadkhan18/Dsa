@@ -1,0 +1,7 @@
+class Solution {
+  public:
+    int sumOfNaturals(int n) {
+        int M = 1000000007;
+        return (((n*1LL*(n+1)))/2)%M;
+    }
+};
