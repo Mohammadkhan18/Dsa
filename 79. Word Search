@@ -1,0 +1,39 @@
+class Solution {
+public:
+     bool isExist(vector<vector<char>>& board,string& word,int row,int col,int ind,int m,int n){
+         if(ind == word.length()) return true;
+         if(row<0||col<0||row == m||col == n||board[row][col] != word[ind] || board[row][col] == '!') return false;
+
+
+         char c = board[row][col];
+         board[row][col] = '!';
+         bool top = isExist(board,word,row-1,col,ind+1,m,n);
+         bool right = isExist(board,word,row,col+1,ind+1,m,n);
+         bool bottom = isExist(board,word,row+1,col,ind+1,m,n);
+         bool left = isExist(board,word,row,col-1,ind+1,m,n);
+
+         board[row][col] = c;
+           return top || right || bottom || left; 
+     }
+   
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        int m = board.size();
+        int n = board[0].size();
+
+        int ind = 0;
+
+        // First search the first character
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (board[i][j] == word[ind]) {
+                    if (isExist(board, word, i, j, ind, m, n))
+                        return true;
+                          }
+            }
+        }
+
+        return false;
+    }
+};
