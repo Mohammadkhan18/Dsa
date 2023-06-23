@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    int leastInterval(int N, int K, vector<char> &tasks) {
+        map<char,int>m;
+    multimap<int,char>track;
+    for(auto &it:tasks)
+    m[it]++;
+    for(auto &it:m)
+    track.insert({it.second,it.first});
+    auto greatest=track.end();
+    greatest--;
+    int ans=1+(greatest->first-1)*(K+1); //AP formula-:(a+(n-1)*d)
+    int extra=0;
+    for(auto &it:track)
+    if(it.first<greatest->first)
+    continue;
+    else
+    extra++;
+    extra--; //one case is already covered
+    ans+=extra;
+    ans=max(ans,N);
+    return ans;
+    }
+};
