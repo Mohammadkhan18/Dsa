@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<string> ans;
+    string nums;
+    int target;
+    vector<string> addOperators(string nums, int target) {
+        this->nums = nums;
+        this->target = target;
+        backtrack(0,"",0,0);
+        return ans;
+    }
+    void backtrack(int i, const string& path, long res,long prev){
+        if(i == nums.length()){
+            if(res == target) ans.push_back(path);
+            return;
+        }
+        string numStr;
+       long num = 0;
+       for(int j =i; j < nums.length();j++){
+           if(j>i && nums[i] == '0') break;
+           numStr += nums[j];
+           num =num * 10 + nums[j] -'0';
+           if(i == 0){
+               backtrack(j+1,path+numStr,num,num);
+           } else{
+               backtrack(j+1,path+'+'+numStr,res+num,num);
+               backtrack(j+1,path+'-'+numStr,res-num,-num);
+               backtrack(j+1,path+'*'+numStr,res-prev+prev*num,prev*num);
+           }
+       }
+    }
+};
