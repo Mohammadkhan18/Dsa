@@ -1,0 +1,27 @@
+void ancestor(Node* root, vector<int>& ans, int k, int node, int& x){
+    if(root==NULL){
+        return ;
+    }
+    ans.push_back(root->data);
+    // left
+    ancestor(root->left, ans, k, node, x);
+    // right
+    ancestor(root->right, ans, k, node, x);
+    if(root->data==node){
+        int cnt=-1;
+        for(int i=ans.size()-1;i>=0;i--){
+            cnt++;
+            if(cnt==k){
+                x = ans[i];
+            }
+        }
+    }
+    ans.pop_back();
+}
+int kthAncestor(Node *root, int k, int node)
+{
+    vector<int>ans;
+    int x=-1;
+    ancestor(root, ans, k , node, x);
+    return x;
+}
