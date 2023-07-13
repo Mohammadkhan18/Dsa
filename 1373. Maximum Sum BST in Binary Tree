@@ -1,0 +1,46 @@
+int ans;
+class prop{
+public:
+    bool bst;   
+    int ma;        
+    int mi;         
+    int s;         
+    prop(){
+        bst=true;
+        ma=INT_MIN;
+        mi=INT_MAX;
+        s=0;
+    }
+};
+class Solution {
+public:
+    prop calcSum(TreeNode* root){
+        if (root == NULL){
+            return prop();
+        }
+        prop p;
+        prop pl = calcSum(root->left);                        
+        prop pr = calcSum(root->right);                      
+		
+		//if sub-tree including this node is bst
+        if ( pl.bst==true && pr.bst==true && root->val>pl.ma && root->val<pr.mi ){
+            p.bst = true;                                                      
+            p.s = pl.ms + pr.ms + root->val;          
+            p.mi  = min(root->val, pl.mi);
+            p.ma = max(root->val, pr.ma);
+        }
+		//if current tree is not a bst
+        else {
+            p.bst=false;
+            p.s=max(pl.s, pr.s);
+        }
+		
+        ans=max(ans, p.s);
+        return p;
+    }
+    int maxSumBST(TreeNode* root){
+        ans = 0;
+        calcSum(root);
+        return ans;
+    }
+};
