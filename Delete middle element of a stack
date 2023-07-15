@@ -1,0 +1,15 @@
+class Solution
+{
+    public:
+    void solve(stack<int>&s, int mid){
+        int top = s.top();
+        s.pop();
+        if(mid == 0) return;
+        solve(s,mid-1);
+        s.push(top);
+    }
+    void deleteMid(stack<int>&s, int n)
+    {
+        solve(s,n/2);
+    }
+};
