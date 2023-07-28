@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string reverseVowels(string s) {
+        int n = s.size();
+        vector<int>temp;
+        for(int i =0; i<n;i++){ 
+        if(s[i]=='a'|| s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        temp.emplace_back(i);
+        }
+        int low =0, high= temp.size()-1;
+        while(low<=high){
+            swap(s[temp[low]],s[temp[high]]);
+            low++;
+            high--;
+        }
+        return s;
+    }
+};
