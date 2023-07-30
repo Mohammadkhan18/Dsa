@@ -1,0 +1,21 @@
+class Solution{
+  public:
+   void inorder(Node *root,vector<Node*>& ans){
+       if(root == NULL) return;
+       inorder(root->left,ans);
+       ans.push_back(root);
+       inorder(root->right,ans);
+   }
+    Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        vector<Node*> ans;
+        inorder(root,ans);
+        int n = ans.size();
+        for(int i = 0; i<n;i++){
+            if(ans[i] == x){
+                if(i!=n-1) return ans[i+1];
+            }
+        }
+        return NULL;
+    }
+};
