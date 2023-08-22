@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+    //Function to find minimum number of operations that are required 
+    //to make the matrix beautiful.
+    int findMinOpeartion(vector<vector<int> > matrix, int n)
+    {
+        vector<int> rowSum(n, 0);
+        vector<int> colSum(n, 0);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                rowSum[i] += matrix[i][j];
+                colSum[j] += matrix[i][j];
+            }
+        }
+        int maxr=*max_element(rowSum.begin(),rowSum.end());
+        int maxc=*max_element(colSum.begin(),colSum.end());
+        int ans1=0,ans2=0;
+        for(int i=0;i<n;i++){
+            ans1+=maxr-rowSum[i];
+            ans2+=maxc-colSum[i];
+        }
+        return max(ans1,ans2)
+    } 
+};
