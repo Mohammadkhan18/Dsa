@@ -1,0 +1,47 @@
+class Solution {
+public:
+ 
+    bool find(vector<vector<char>> &grid,string word,int row,int col)
+    {
+        int n=grid.size(),m=grid[0].size();
+        
+        vector<pair<int,int>> directions={{-1,0},{0,1},{1,0},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}};
+        
+        for(int i=0;i<8;i++)
+        {
+            int idx=0,nrow=row,ncol=col;
+            int delrow=directions[i].first;
+            int delcol=directions[i].second;
+                
+            while(nrow>=0 && nrow<n && ncol>=0 && ncol<m && idx<word.size() && grid[nrow][ncol]==word[idx])
+            {
+                nrow+=delrow;  ncol+=delcol;   
+                
+                idx++;
+            } 
+            
+            if(word.size()==idx) return true;
+        }
+        
+         return false;    
+    }
+vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+    
+    vector<vector<int>> result;
+    
+    int n=grid.size(),m=grid[0].size();
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+           if(grid[i][j]==word[0] && find(grid,word,i,j))
+           {
+               result.push_back({i,j});
+           }
+        }
+    }
+   
+    return result;
+	}
+};
