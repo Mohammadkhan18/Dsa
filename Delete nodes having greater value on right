@@ -1,0 +1,32 @@
+class Solution
+{
+    public:
+    Node *reverse(Node* &head){
+        Node *prev = NULL , *curr = head;
+        while(head){
+            curr = head->next;
+            head->next = prev;
+            prev = head;
+            head = curr;
+        }
+        return prev;
+    }
+    Node *compute(Node *head)
+    {
+        head = reverse(head);
+        Node *temp = head , *temp2 = head;
+        int mx = temp->data;
+        temp = temp->next;
+        while(temp){
+            if(temp->data >= mx){
+                head->next = temp;
+                head = temp;
+                mx = temp->data;
+            }
+            temp = temp->next;
+        }
+        head->next = NULL;
+        return reverse(temp2);
+    }
+    
+};
