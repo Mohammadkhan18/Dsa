@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string licenseKeyFormatting(string s, int k) {
+        int n = s.length();
+        int d =0;
+        string ans= "",x="";
+        for(int i =0;i<n;i++){
+            if(s[i]=='-')
+             d++;
+             else
+             x+=s[i];
+        }
+        if(d==n) return "";
+        int t = n-d;
+        int z= t/k;
+        int l = t-z*k;
+        int i =0;
+        while(l--){
+            ans+=x[i];
+            i++;
+        }
+        if(ans.length()>0)
+        ans+='-';
+
+        int a=0;
+        while(i<x.size()){
+            ans+=x[i];
+            a++;
+            if(a==k){
+                a=0;
+                ans+='-';
+            }
+            i++;
+        }
+        ans.pop_back();
+        transform(ans.begin(),ans.end(),ans.begin(),::toupper);
+        return ans;
+    }
+};
