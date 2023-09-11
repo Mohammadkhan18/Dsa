@@ -1,0 +1,16 @@
+class Solution{
+public:
+    bool isLucky(int n) {
+          int whichPlaceNumbersDeleted = 2; 
+        int totalNumberRemains = n;
+        while(totalNumberRemains>=whichPlaceNumbersDeleted)
+        {
+            if(totalNumberRemains%whichPlaceNumbersDeleted==0)return 0;
+            
+            totalNumberRemains = totalNumberRemains - totalNumberRemains/whichPlaceNumbersDeleted;
+            
+            whichPlaceNumbersDeleted++;
+        }
+        return 1;
+    }
+};
