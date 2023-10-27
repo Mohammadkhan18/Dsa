@@ -1,0 +1,101 @@
+class Solution{
+  public:
+  
+    int solve(int i,int j,string s,string t,vector<vector<int>>&dp)
+    {
+        if(i>=s.length() || j>=t.length())
+        {
+            return 0;
+        }
+        
+        if(dp[i][j] != -1)
+        {
+            return dp[i][j];
+        }
+        
+        int ans = 0;
+        if(s[i] == t[j])
+        {
+            ans = 1+solve(i+1,j+1,s,t,dp);
+        }
+        else
+        {
+            ans = max(solve(i+1,j,s,t,dp),solve(i,j+1,s,t,dp));
+        }
+        
+        return dp[i][j] = ans;
+        
+    }
+    
+    int solveTab(string s,string t)
+    {
+       
+        int length = s.length();
+        vector<vector<int>>dp(length+1,vector<int>(length+1,0));
+        
+        for(int i=length-1;i>=0;i--)
+        {
+            for(int j=length-1;j>=0;j--)
+            {
+                int ans = 0;
+                if(s[i] == t[j])
+                {
+                    ans = 1+dp[i+1][j+1];
+                }
+                else
+                {
+                    ans = max(dp[i+1][j],dp[i][j+1]);
+                }
+                
+                dp[i][j] = ans;
+            }
+        }
+        
+        return dp[0][0];
+    }
+    
+    int solveSpaceOptimal(string s,string t)
+    {
+       
+        int length = s.length();
+        vector<int>curr(length+1,0);
+        vector<int>next(length+1,0);
+        
+        for(int i=length-1;i>=0;i--)
+        {
+            for(int j=length-1;j>=0;j--)
+            {
+                int ans = 0;
+                if(s[i] == t[j])
+                {
+                    ans = 1+next[j+1];
+                }
+                else
+                {
+                    ans = max(next[j],curr[j+1]);
+                }
+                
+                curr[j] = ans;
+            }
+            next = curr;
+        }
+        
+        return next[0];
+    }
+    
+    int minimumNumberOfDeletions(string S) { 
+        // code here
+        
+        string t = S;
+        reverse(t.begin(),t.end());
+        // vector<vector<int>>dp(S.length()+1,vector<int>(S.length()+1,-1));
+        // int l = solve(0,0,S,t,dp);
+        
+        
+        // int l = solveTab(S,t);
+        
+        int l = solveSpaceOptimal(S,t);
+        return S.length()-l;
+    } 
+};
+
