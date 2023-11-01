@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void preorder(TreeNode* root,vector<int>& result){
+        if(!root) return ;
+        result.push_back(root->val);
+        preorder(root->left,result);
+        preorder(root->right,result);
+    }
+    vector<int> findMode(TreeNode* root) {
+        vector<int> preodr;
+        preorder(root,preodr);
+        unordered_map<int ,int> freq;
+        int maxi = 0;
+        for(int val : preodr){
+            freq[val]++;
+            maxi = max(maxi,freq[val]);
+        }
+        vector<int> result;
+        for(const auto& pair : freq){
+            if(pair.second == maxi)
+            result.push_back(pair.first);
+        }
+        return result;
+    }
+};
